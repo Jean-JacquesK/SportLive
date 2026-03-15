@@ -4,13 +4,20 @@ import { useGames } from "./hooks/useGames"
 import GameCard from "./components/GameCard"
 import { mapStatus } from "./utils/mapStatus"
 import { SportSelector } from "./components/SportSelector"
+import { FilterBar } from "./components/FilterBar"
 
 function App() {
   // 1. State pour le sport sélectionné (par défaut : le premier sport)
   const [selectedSport, setSelectedSport] = useState(SPORTS[0])
 
+  const [filter, setFilter] = useState<"ALL" | "LIVE" | "UPCOMING" | "FINAL">("ALL")
+
+
   // 2. Appel du hook
   const { games, loading, error } = useGames(selectedSport)
+
+  
+  const filteredGames = filter === "ALL" ? games : games.filter(game =>  mapStatus(game.status.type.state) === filter )
 
   // 3. Affichage
   if (error) return <p>{error}</p>
@@ -21,10 +28,12 @@ function App() {
       <div className="relative">
         <SportSelector sports={SPORTS} selected={selectedSport} onSelect={setSelectedSport} />
 
+        <FilterBar filter={filter} onChange={setFilter} />
+
         {loading && <p className="flex flex-col justify-center items-center">Loading games...</p>}
 
         <div className="p-4 flex flex-col justify-center items-center gap-4">
-          {games.map(game => {
+          {filteredGames.map(game => {
             const competitors = game.competitions[0].competitors
             const homeTeam = competitors.find(c => c.homeAway === "home")
             const awayTeam = competitors.find(c => c.homeAway === "away")
