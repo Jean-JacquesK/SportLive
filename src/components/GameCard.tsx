@@ -59,7 +59,7 @@ const GameCard = ({ homeTeam, awayTeam, status, clock }: GameCardProps) => {
 
           {/* Away team */}
           <div className="flex items-center justify-between gap-3">
-            <span className="text-[22px] font-medium text-neutral-900 dark:text-neutral-100 min-w-[28px] text-right">
+            <span className="text-[22px] font-medium text-neutral-900 dark:text-neutral-100 min-w-[28px] text-left">
               {awayTeam.score !== null ? awayTeam.score : "-"}
             </span>
             <span className={`text-[15px] font-medium ${awayWin ? "text-green-500" : "text-neutral-900 dark:text-neutral-100"}`}>
