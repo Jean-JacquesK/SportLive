@@ -52,7 +52,11 @@ export function useGames(sport: Sport): UseGamesReturn {
 
     fetchGames()
 
+    // Rafraîchit les données toutes les 30 secondes
+    const intervalId = setInterval(fetchGames, 30000)
+
     return () => {
+      clearInterval(intervalId)
       controller.abort()
     }
   }, [sport])
