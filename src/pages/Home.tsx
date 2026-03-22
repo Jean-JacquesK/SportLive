@@ -41,6 +41,7 @@ const Home = () => {
 
             return (
               <GameCard key={game.id}
+                gameID= {game.id}
                 homeTeam={{ name: homeTeam?.team.displayName || "Home", score: homeTeam ? Number(homeTeam.score) : null }}
                 awayTeam={{ name: awayTeam?.team.displayName || "Away", score: awayTeam ? Number(awayTeam.score) : null }}
                 status={status}

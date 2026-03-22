@@ -1,22 +1,27 @@
+import { useNavigate } from "react-router-dom"
+
 type Team = {
   name: string
   score: number | null
 }
 
 type GameCardProps = {
+  gameID: string,
   homeTeam: Team
   awayTeam: Team
   status: "LIVE" | "FINAL" | "UPCOMING"
   clock?: string
 }
 
-const GameCard = ({ homeTeam, awayTeam, status, clock }: GameCardProps) => {
+const GameCard = ({ gameID, homeTeam, awayTeam, status, clock }: GameCardProps) => {
+
+  const navigate = useNavigate();
 
   const homeWin = status === "FINAL" && homeTeam.score !== null && awayTeam.score !== null && homeTeam.score > awayTeam.score
   const awayWin = status === "FINAL" && homeTeam.score !== null && awayTeam.score !== null && awayTeam.score > homeTeam.score
 
   return (
-    <div className="w-120 mx-auto px-4 py-3">
+    <div className="w-120 mx-auto px-4 py-3" onClick={() => navigate(`/game/${gameID}`)} style={{ cursor: "pointer" }}>
       <div className="w-full text-center mx-auto bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl p-4">
         
         {/* Status */}
