@@ -1,21 +1,15 @@
-import { useState } from "react"
 import { SPORTS } from "../config/sports"
 import { useGames } from "../hooks/useGames"
 import GameCard from "../components/GameCard"
 import { mapStatus } from "../utils/mapStatus"
 import { SportSelector } from "../components/SportSelector"
 import { FilterBar } from "../components/FilterBar"
+import { useSport } from "../context/SportContext"
 
 const Home = () => {
-  // 1. State pour le sport sélectionné (par défaut : le premier sport)
-  const [selectedSport, setSelectedSport] = useState(SPORTS[0])
+  const { selectedSport, setSelectedSport, filter, setFilter } = useSport()
 
-  const [filter, setFilter] = useState<"ALL" | "LIVE" | "UPCOMING" | "FINAL">("ALL")
-
-
-  // 2. Appel du hook
   const { games, loading, error } = useGames(selectedSport)
-
   
   const filteredGames = filter === "ALL" ? games : games.filter(game =>  mapStatus(game.status.type.state) === filter )
 
