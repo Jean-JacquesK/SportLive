@@ -5,13 +5,18 @@ import { mapStatus } from "../utils/mapStatus"
 import { SportSelector } from "../components/SportSelector"
 import { FilterBar } from "../components/FilterBar"
 import { useSport } from "../context/SportContext"
+import { useMemo } from "react"
 
 const Home = () => {
   const { selectedSport, setSelectedSport, filter, setFilter } = useSport()
 
   const { games, loading, error } = useGames(selectedSport)
   
-  const filteredGames = filter === "ALL" ? games : games.filter(game =>  mapStatus(game.status.type.state) === filter )
+//   const filteredGames = filter === "ALL" ? games : games.filter(game =>  mapStatus(game.status.type.state) === filter )
+  const filteredGames = useMemo(() => {
+    if (filter === "ALL") return games
+    return games.filter(game => mapStatus(game.status.type.state) === filter)
+  }, [games, filter])
 
   // 3. Affichage
   if (error) return <p>{error}</p>
