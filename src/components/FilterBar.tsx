@@ -15,7 +15,7 @@ export const FilterBar = ({ filter, onChange }: FilterBarProps) => {
                     className={`px-3 py-1 rounded-full border cursor-pointer hover:bg-blue-900 hover:text-white ${
                         value === filter
                             ? "bg-blue-900 text-white border-blue-900"
-                            : "bg-white dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800 text-neutral-900 dark:text-neutral-100"
+                            : "bg-white border-neutral-200 text-neutral-900"
                     }`}
                     onClick={() => onChange(value as FilterValue)}
                 >
