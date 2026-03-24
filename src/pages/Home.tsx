@@ -4,8 +4,8 @@ import GameCard from "../components/GameCard"
 import { mapStatus } from "../utils/mapStatus"
 import { SportSelector } from "../components/SportSelector"
 import { FilterBar } from "../components/FilterBar"
-import { useSport } from "../context/SportContext"
 import { useMemo } from "react"
+import { useSport } from "../hooks/useSport"
 
 const Home = () => {
   const { selectedSport, setSelectedSport, filter, setFilter } = useSport()

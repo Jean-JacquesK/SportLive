@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Home from "./pages/Home"
-import { SportProvider } from "./context/SportContext"
 import { GameDetail } from "./components/GameDetail"
+import { SportProvider } from "./providers/SportProvider"
 
 
 function App() {

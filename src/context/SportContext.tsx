@@ -1,8 +1,6 @@
-import { createContext, useContext, useState } from "react"
+import { createContext } from "react"
 import { SPORTS } from "../config/sports"
 import type { Sport } from "../types/sports"
-
-type FilterValue = "ALL" | "LIVE" | "FINAL" | "UPCOMING"
 
 type SportContextType = {
   selectedSport: Sport
@@ -17,19 +15,3 @@ export const SportContext = createContext<SportContextType>({
   filter: "ALL",
   setFilter: () => {}
 })
-
-export function SportProvider({ children }: { children: React.ReactNode }) {
-  const [selectedSport, setSelectedSport] = useState<Sport>(SPORTS[0])
-  const [filter, setFilter] = useState<FilterValue>("ALL")
-
-  return (
-    <SportContext.Provider value={{ selectedSport, setSelectedSport, filter, setFilter }}>
-      {children}
-    </SportContext.Provider>
-  )
-}
-
-// Hook custom pour consommer le contexte
-export function useSport() {
-  return useContext(SportContext)
-}
